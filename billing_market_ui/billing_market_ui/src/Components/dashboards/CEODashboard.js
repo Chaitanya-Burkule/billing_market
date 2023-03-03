@@ -6,8 +6,7 @@ import CEONavBar from '../Layout/CEONavBar';
 function CEODashboard() {
   return (
     <>
-    <CEONavBar />
-
+    <CEONavBar/>
     <Outlet />
     </>
   );

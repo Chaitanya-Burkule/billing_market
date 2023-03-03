@@ -18,8 +18,10 @@ step 8: cd billing_market
 
 step 9: pip install -r requirements.txt
 
-step 10: create .env file
+step 10: create .env file in root directory
         add SECRET_KEY
+        EMAIL_HOST_USER=email
+        EMAIL_HOST_PASSWORD=password_for_email_integration_given_by_email_service_provider
         e.g : SECRET_KEY=ghxfdzkfjvjhblkh45fghfyi86yigp9
 
 step 11: py manage.py makemigrations   
@@ -29,3 +31,5 @@ step 12: py manage.py migrate
 step 12: py manage.py createsuperuser
 
 step 14: py manage.py runserver
+
+npm install react-scripts

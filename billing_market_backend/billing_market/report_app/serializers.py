@@ -18,11 +18,20 @@ class InvoiceProductSerializer(serializers.ModelSerializer):
     def get_product_invoice(self, obj):
         return f'{obj.product_invoice.product_name}'
     
+    
 class InvoiceSerializers(serializers.ModelSerializer):
     
     invoice_date = serializers.DateField(read_only=True)
     product_in_invoice = InvoiceProductSerializer(read_only=True, many=True)
+    customer = serializers.SerializerMethodField()
+    invoice_created_by  = serializers.SerializerMethodField()
 
     class Meta:
         model = Invoice
-        fields = ['invoice_date' , 'product_in_invoice']
+        fields = "__all__"
+
+    def get_customer(self, obj):
+        return f'{obj.customer.name}'
+    
+    def get_invoice_created_by(self, obj):
+        return f'{obj.invoice_created_by.first_name} {obj.invoice_created_by.last_name}'

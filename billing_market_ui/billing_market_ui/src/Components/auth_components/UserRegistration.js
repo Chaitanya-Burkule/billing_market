@@ -12,10 +12,11 @@ function UserRegistration() {
   const token = sessionStorage.getItem('access_token')
 
   async function saveData(data){
+    console.log(data)
     try{
       const resp = await axios.post('http://localhost:8000/auth/register/',data,{
         headers:{'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token}`}});
-        console.log('status 1 ===',resp.status);
+        console.log('data ===',resp.data);
 
       if(resp.status === 201){
         alert('Employee Added successfully!!')
@@ -98,7 +99,7 @@ function UserRegistration() {
         <input type='email' id='em' className='form-control' {...register('email',{
           required:{value:true,message:'This field is required'},
           pattern:{
-          value:/^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-z]+)$/,
+          value:/^([_\-.0-9a-zA-Z]+)@([_\-.0-9a-zA-Z]+)\.([a-zA-z.]+)$/,
           message:'invalid email'
         }
         })} />

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'corsheaders',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
     'auth_app',
     'purchase_app',
     'report_app',

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import EmployeeUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.models import User
 
 
 class EmployeeUserSerializer(serializers.ModelSerializer):
@@ -69,3 +70,22 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         print(self.user)
         data['role'] = self.user.user_role
         return data
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    
+    def validate_password(self, value):
+        if len(value) < 8 or len(value) > 16:
+            raise serializers.ValidationError('password must contain 8 to 16 charecters')
+        if value.islower() or value.isupper():
+            raise serializers.ValidationError('password must contain least 1 uppercase and 1 lower charecters')
+        if value.isalpha():
+            raise serializers.ValidationError('password must contain least 1 digit')
+        if value.isalnum():
+            raise serializers.ValidationError('password must contain 1 special charecters')
+        return value
+
